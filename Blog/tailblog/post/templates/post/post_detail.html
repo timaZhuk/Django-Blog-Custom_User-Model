@@ -1,0 +1,59 @@
+{% extends 'post/base.html'%}
+<!--  -->
+{% block content %}
+<div class="space-y-4">
+  <article class="p-6 bg-gray-100 rounded-xl">
+    <h2 class="p-2 text-3xl">{{post.title}}</h2>
+    <h5: class="p-2"> 
+        <a href="{% url 'category_detail' post.category.id %}">{{post.category.title}}</a>
+    </h5>
+    <span class="mb-4 block text-sm text-gray-600">{{post.created_at}}</span>
+    <p class="mb-6 font-semibold">{{post.intro}}</p>
+    <p class="mb-6 font-semibold">{{post.body}}</p>
+  </article>
+
+  <!--  -->
+  <div class="mt-4 p-6 bg-gray-100 rounded-xl">
+    <h3 class="text-xl">Comments</h3>
+    {% for comment in post.comments.all %}
+    <div class="mb-4 py-3 px-4 rounded-xl bg-white">
+      <h5>{{comment.name}} at |{{comment.created_at|timesince}}</h5>
+      <p>{{comment.comment}}</p>
+    </div>
+    <!--  -->
+
+    <!--  -->
+
+    {% endfor %}
+    <div class="mb-4 py-3 px-4">
+      <h2>Add new comment</h2>
+    </div>
+    <form method="post" action=".">
+      {% csrf_token %}
+      <div>
+        <label for="">Name:</label><br />
+        <input type="text" name="name" class="py-3 px-6 rounded-xl bg-white" />
+      </div>
+      <div>
+        <label for="">E-mail:</label><br />
+        <input type="text" name="email" class="py-3 px-6 rounded-xl bg-white" />
+      </div>
+      <div>
+        <label for="">Comment</label><br />
+        <textarea
+          class="py-3 px-6 rounded-xl bg-white"
+          name="comment"
+          id=""
+          cols="30"
+          rows="8"
+        ></textarea>
+      </div>
+      <div>
+        <button class="py-3 px-6 rounded-xl bg-emerald-800 text-white">
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+  {% endblock %}
+</div>
