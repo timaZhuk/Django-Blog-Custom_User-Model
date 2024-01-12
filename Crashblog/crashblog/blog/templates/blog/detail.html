@@ -1,0 +1,74 @@
+{% extends 'core/base.html'%}
+<!--  -->
+{% block title %}{{post.title}} |{% endblock %}
+<!--  -->
+{% block content %}
+<!--  -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="conatiner">
+      <section class="section">
+        <div class="columns">
+          <!--  -->
+
+          <div class="column is-8 is-offset-2">
+            <div class="content is-medium">
+              <div class="content">
+                {% if post.image %}
+                <figure class="image is-3by2 mb-6">
+                  <img src="{{post.image.url}}" alt="" />
+                </figure>
+                {% endif %}
+              </div>
+              <h4 class="subtitle" is-4>{{post.created_at|date:'M-d-Y'}}</h4>
+              <h1 class="title">{{post.title}}</h1>
+
+              <p>{{post.intro}}</p>
+              <div>
+                <h4>Description:</h4>
+                <p>{{post.body}}</p>
+                <p>
+                  <small
+                    >Category:
+                    <a href="{% url 'category_detail' post.category.slug %}"
+                      >{{post.category}}</a
+                    ></small
+                  >
+                </p>
+              </div>
+              <hr />
+              <h2 class="subtitle is-4">Comments:</h2>
+              <form method="post" class="mb-6">
+                {% csrf_token %}
+                <!--  -->
+                {{form.as_p}}
+                <!--  -->
+                <div class="field">
+                  <div class="control">
+                    <button class="button is-success">Submit comment</button>
+                  </div>
+                </div>
+              </form>
+              <!--  -->
+              {% for comment in post.comments.all%}
+              <article class="media box">
+                <div class="media-content">
+                  <strong>{{comment.name}}</strong>
+                  <p><small>{{comment.created_at|timesince}} ago</small></p>
+                  <p>{{comment.body}}</p>
+                </div>
+              </article>
+              {% endfor %}
+
+              <!--  -->
+            </div>
+          </div>
+
+          <!--  -->
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'core/base.html'%}
+<!--  -->
+{% block title %}Home |{% endblock %}
+<!--  -->
+{% block content %}
+<!--  -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="conatiner">
+      <section class="section">
+        <div class="columns">
+          <!--  -->
+
+          <div class="column is-8 is-offset-2">
+            {% for post in posts%}
+
+            <div class="content is-medium">
+              <a href="{% url 'post_detail' post.category.slug post.slug%}">
+                <h4 class="subtitle" is-4>{{post.created_at|date:'M-d-Y'}}</h4>
+                <h1 class="title">{{post.title}}</h1>
+              </a>
+
+              <p>{{post.intro}}</p>
+            </div>
+            <div class="content">
+              {% if post.image %}
+              <figure class="image is-3by2 mb-6">
+                <img src="{{post.image.url}}" alt="" />
+              </figure>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+
+          <!--  -->
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+{% endblock %}
+<!--  -->s
