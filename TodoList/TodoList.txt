@@ -1,0 +1,10 @@
+1-DONE SetUp the Design
+2- DONE Create Django app (todo)
+3- DONE Create View and test
+4- DONE Databasemodel
+5-Done Create view for adding tasks
+6-DONE Set up form for adding tasks
+7-DONE Get all tasks
+8-DONE Resetting the form
+9-DONE Mark tast done
+10 - Delete a task
