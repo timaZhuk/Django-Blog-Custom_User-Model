@@ -1,0 +1,113 @@
+<!--  -->
+{% extends 'core/base.html'%}
+<!--  -->
+{%block title%} Shop|TradePro{% endblock%}
+<!--  -->
+{% block content%}
+
+<!-- products -->
+<div class="max-w-6xl mx-auto flex flex-wrap items-start py-2 px-6 xl:px-0">
+  <!-- side bar with search -->
+  <div class="filters w-full lg:w-1/4">
+    <h3 class="mb-3 text-xl uppercase">Search</h3>
+    <!-- form -->
+    <form method="get" action=".">
+      <div class="flex">
+        <input
+          name="query"
+          type="text"
+          class="p-4 bg-gray-100 border-0"
+          placeholder="Search..."
+        />
+        <button class="p-4 bg-gray-100 border-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </form>
+    <!-- form -->
+    <h3 class="mt-6 mb-3 text-xl uppercase">Categories:</h3>
+    <ul class="space-y-2">
+      <li>
+        <a
+          href="{% url 'shop'%}"
+          class="px-2 py-2 text-green-700 border-2 border-purple-300 rounded-xl"
+          >All Categories</a
+        >
+      </li>
+      {% for category in categories %}
+      <li>
+        <a
+          href="{% url 'shop'%}?category={{category.slug}}"
+          class="{% if category.slug == active_category%} text-green-600 {% else %}text-gray-600 hover:text-green-600{% endif %}"
+          >{{category.name}}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- side bar with search -->
+  <!-- flex container -->
+  <div class="products w-full lg:w-3/4 -mt-4 flex items-center flex-wrap">
+    {% for product in products %}
+    <!-- products -->
+    {% include 'product/partials/product_list_item.html' %}
+    <!--  -->
+    {% endfor %}
+  </div>
+  <!-- flex container -->
+</div>
+<!-- products -->
+
+{% endblock %}
+
+<!-- 
+
+<div class="w-full md:w-1/3 xl:w-1/4 p-6">
+      
+      <a href="">
+        <img
+          class="rounded-xl hover:shadow-lg"
+          src="../../../images/mac_prod.jpeg"
+          alt=""
+        />
+      </a>
+      <div class="pt-3 flex items-center justify-between">
+        <a href="#">{{product.name}}</a>
+        <a href="#" class="text-gray-500 hover:text-green-700"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+        </a>
+      </div>
+      
+      <p class="pt-1 text-gray-500">${{product.get_display_price}}</p>
+      
+    </div>
+    
+
+
+ -->

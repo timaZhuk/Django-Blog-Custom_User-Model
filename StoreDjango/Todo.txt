@@ -1,0 +1,109 @@
+DONE Install and create virtual environment
+DONE Install and create empty django project
+DONE Create apps for core pages
+DONE Create a simple base.html file
+DONE Extend base.html file nd use for frontpage
+DONEAdd products for front pages
+DONE Create app for products
+DONE Create database models for categories
+DONE Create  database models for products
+DONE Add a few roducts in the admin interface
+DONE Show the products on the frontpage
+DONE Create html page for the category/shop
+DONE Create html page for the product detail page
+DONE show Categories in the sidebar
+DONE show active category
+DONE simple product search
+DONE Fix dynamic information in product lists
+DONE Make product lists reusable
+DONE Show product detail page
+DONE Create Django app for the cart 
+DONE Create a cart class
+DONE Make cart globally available
+DONE Create view for adding to cart 
+DONE include htmx cdn https://unpkg.com/htmx.org@1.7.0
+DONE Create reusable menu cart html
+DONE Add to cart 
+DONE Set up html for the sign up page
+DONE Set up html for the log n page
+DONEAdd product images
+DONE Make it possible to sign up
+DONE Make it possible to log out 
+DONE Make it possible to log in
+DONE Make html for cart page
+DONE Make html for the checkout page 
+
+
+#1 installing on Ubuntu ngnix
+sudo apt install ngnix
+#2 Install virtual environment python3
+sudo apt install -y python3-venv
+#3 Create python virtual environment name_of_folder = 'django_env'
+python3 -m venv django_env
+#4 ls for (look at folder)
+#5 activate django_env
+source django_env/bin/activate
+#6 after activation install django
+pip install django
+#7 install gunicorn
+pip install gunicorn
+#8 Creating default project (Example)
+django-admin startproject myproject
+#9 open file with nano ('text editor') settings.py
+nano myproject/myproject/settings.py
+#10 modify the ALLOWED_HOSTS = ['167.99.192.225'] put any ip we have from server
+ALLOWED_HOSTS = ['167.99.192.225']
+#11 starting to configurate gunicorn server
+#create 'conf' folder 
+mkdir conf
+#12 creating file (gunicorn_config.py) in conf folder
+nano conf/gunicorn_config.py
+#13 write commands in gunicorn_config.py
+command = 'home/ubuntu/django_env/bin/gunicorn'
+pythonpath = '/home/ubuntu/myproject'
+bind = '167.99.192.225:8000'
+wokers = 3
+#14 we have to tell gunicorn use this commands and point it to wsgi server
+gunicorn -c conf/gunicorn_config.py myproject.wsgi (press Enter)
+#15 insert ctrl+z (we don't stop gunicorn) but can use terminal
+#16 for ngnix you can exit from virtualenvironment
+sudo service ngnix start 
+#17 create the static directory 
+mkdir static
+#18 point to thid folder, make changes in settings.py
+nano myproject/myproject/settings.py
+#19 change static folder path (default=>) STATIC_URL = '/static/'
+STATIC_URL = '/home/ubuntu/static/'
+#20 Create config file for my project in ngnix (myproject) file
+sudo nano /etc/ngnix/sites-available/myproject   
+#21 insert these snippet to 'myproject' file
+server{
+    listen 80;
+    server_name 167.99.192.225;  #ip address on my machine Ubuntu
+
+
+
+location /static/ {
+    root /home/ubuntu/static/;
+}
+
+location / {
+    proxy_pass http://167.99.192.225:8000;
+}
+
+}//end of server brakets
+
+#22 go to folder
+cd /etc/ngnix/sites-enabled
+(inside this folder we have 'default' file)
+#23 I want to enable my site (create link to my project)
+sudo ln -s /etc/ngnix/sites-availabel/myproject
+ls -l (command for look at processes an d who control our server)
+#24 restart ngnix
+sudo systemctl restart ngnix
+
+
+
+
+
+

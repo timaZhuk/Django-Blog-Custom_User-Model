@@ -1,0 +1,50 @@
+<!--  -->
+{% extends 'core/base.html'%}
+<!--  -->
+{%block title%} Cart|TradePro{% endblock%}
+<!--  -->
+{% block content%}
+
+<!-- products IMG and Description   -->
+<div class="max-w-6xl mx-auto flex items-start py-2 px-6 xl:px-0">
+  <div class="products w-full w-3/4">
+    <div class="product mb-6 flex pr-6">
+      <a href="#" class="w-1/4">
+        img
+        <img src="1.jpg" alt="" calss="hover:shadow-lg rounded-xl" />
+      </a>
+    </div>
+    <!-- Description -->
+    <div class="w-3/4 pl-6">
+      <div class="flex justify-between">
+        <a href="#" class="text-lg">Product Name</a>
+        <span class="mb-6 pt-1 text-gay-200">$567</span>
+      </div>
+      <hr />
+      <!-- Decreemnt and Increment Buttons -->
+      <div class="quantity mt-6 flex items-center space-x-4">
+        <a href="#" class="p-3 bg-gray-200">-</a>
+        <span>Num2</span>
+        <a href="#" class="p-3 bg-gray-200">+</a>
+      </div>
+    </div>
+    <!-- Desc -->
+  </div>
+  <!-- Summary about Products in Cart   ,w-full -->
+  <div class="summary w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
+    <h2 class="uppercase text-lg mb-5">Summary</h2>
+    <div class="mb-6 flex justify-between">
+      <span class="font-semibold">Total</span>
+      <span>$7777</span>
+    </div>
+    <a
+      href="#"
+      class="inline-block px-8 py-4 rounded-xl bg-green-300 text-gray-500 hover:bg-gray-500 hover:text-green-500"
+    >
+      Checkout
+    </a>
+  </div>
+  <!--  -->
+</div>
+<!--  -->
+{% endblock %}
